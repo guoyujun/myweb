@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style></style>
+<script>
+	window.onload = function(){
+		var oBox = document.querySelector('.box');
+		if(window.DeviceMotionEvent){
+			window.addEventListener('devicemotion',function(ev){
+				var acc = ev.accelerationIncludingGravity;
+				oBox.innerHTML = acc.x+'---'+acc.y+'---'+acc.z;	
+			},false);
+		}else{
+			alert('您的设备不支持重力感应');	
+		}
+	};
+</script>
+</head>
+
+<body>
+	<div class="box"></div>
+</body>
+</html>

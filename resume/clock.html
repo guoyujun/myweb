@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,maxmum-scale=1,initial-scale=1">
+<link rel="stylesheet" href="css/animate.css" />
+<title>创意时钟</title>
+<style>
+*{margin:0; padding:0;}
+html{font-size:20px; background:#f7f3e8;}
+.box{width:100%; height:100%; background:#f7f3e8; overflow:hidden;}
+.button{width:100%; height:3rem; display:block; line-height:50px; color:#fff; font-size:1.7rem; font-weight:bold; text-align:center; text-decoration:none; line-height:3rem; background:-webkit-linear-gradient(pink,yellow); border-radius:10px; box-shadow:inset 0 0 10px #fff,0 5px 5px #ccc;}
+.button:active{text-shadow:2px 2px 2px #ccc; box-shadow:inset 0 0 0 #fff,0 2px 2px #ccc;}
+.wrap{width:16rem; height:24rem; position:relative; background:url(img/clock.jpg); -webkit-background-size:100%;}
+.clock{ width:12rem; height:12rem; border:0.25rem solid #000; margin:5rem auto; border-radius:50%; position:absolute; top:4rem; left:2.6rem;}
+.hou{ width:0.5rem; height:4rem; background:#000; border-radius: 50% 50% 0 0; position:absolute; left:50%; margin-left:-0.25rem; top:2rem; -webkit-transform-origin:bottom;}
+.min{ width:0.3rem; height:5rem; background:#000; border-radius: 50% 50% 0 0; position:absolute; left:50%; margin-left:-0.15rem; top:1rem; -webkit-transform-origin:bottom;}
+.sec{ width:0.2rem; height:5.5rem; background:red; border-radius: 50% 50% 0 0; position:absolute; left:50%; margin-left:-0.2rem; top:0.5rem; -webkit-transform-origin:bottom;}
+.clock span{ position:absolute; width:0.2rem; height:0.5rem;  background:#000;left:50%; margin-left:-0.1rem;top:0; -webkit-transform-origin:center 5.9rem;}
+.clock span.big_scale{ width:0.3rem; margin-left:-0.15rem; height:0.75rem;}
+.big_scale em{ position:absolute; top:0.9rem; left:50%; font-style:normal; width:1.5rem; margin-left:-0.75rem; text-align:center; color:#600; font-weight:bold; text-shadow:0.1rem 0.1rem 0.25rem #9F9; font-size:1.5rem;}
+.clock .cap{ position:absolute; width:1rem; height:1rem; left:50%; top:50%; margin-left:-0.5rem; margin-top:-0.5rem; background: -webkit-radial-gradient(#fff, #000); border-radius:50%;}
+.wrap .icon img{width:2.2rem;}
+.icon img:nth-child(1){margin-left:2rem; margin-top:2rem; -webkit-animation:swing 0.2s linear 0.5s infinite;}
+.icon img:nth-child(2){-webkit-animation:swing 0.2s linear 0.5s infinite;}
+.icon img:nth-child(3){-webkit-animation:swing 0.2s linear 0.5s infinite;}
+.icon img:nth-child(4){-webkit-animation:swing 0.2s linear 0.5s infinite;}
+.icon img:nth-child(5){-webkit-animation:swing 0.2s linear 0.5s infinite;}
+</style>
+<script>
+	;(function(win,doc){
+		var rem = 20/320*doc.documentElement.clientWidth;
+		doc.documentElement.style.fontSize = rem+'px';
+		win.addEventListener('resize',function(){
+			rem = 20/320*doc.documentElement.clientWidth;
+			doc.documentElement.style.fontSize = rem+'px';	
+		},false);	
+	})(window,document);
+</script>
+<script>
+window.onload=function(){
+	
+	var oClock = document.querySelector('.clock');
+	var oHou = document.querySelector('.hou');
+	var oMin = document.querySelector('.min');
+	var oSec = document.querySelector('.sec');
+	
+	//创建刻度
+	var N = 60;
+	for(var i=0;i<N;i++){
+		var oS = document.createElement('span');
+		oS.style.WebkitTransform = 'rotate('+i*6+'deg)';
+		
+		if(i%5==0){
+			oS.className = 'big_scale';
+			oS.innerHTML = '<em>'+(i/5||12)+'<\/em>';
+			var oEm = oS.children[0];
+			oEm.style.WebkitTransform = 'rotate('+-i*6+'deg)';
+		}
+		
+		oClock.appendChild(oS);
+	}
+	
+	
+	
+	function clock(){
+		var oDate = new Date();
+		var h = oDate.getHours();
+		var m = oDate.getMinutes();
+		var s = oDate.getSeconds();
+		var ms = oDate.getMilliseconds();
+		
+		oHou.style.WebkitTransform = 'rotate('+(h*30+m/60*30)+'deg)';
+		oMin.style.WebkitTransform = 'rotate('+(m*6+s/60*6)+'deg)';
+		oSec.style.WebkitTransform = 'rotate('+(s*6+ms/1000*6)+'deg)';
+	}
+	clock()
+	setInterval(clock,1);
+};
+</script>
+</head>
+
+<body>
+<div class="box">
+	<a href="index.html#back" class="button">返回</a>
+	<div class="wrap">
+    	<div class="icon">
+        	<img src="img/images/c-1_06.png">
+            <img src="img/images/c-1_15.png">
+            <img src="img/images/c-1_09.png">
+            <img src="img/images/c-1_12.png">
+            <img src="img/images/c-1_03.png">
+        </div>
+        <div class="clock">
+            <div class="hou"></div>
+            <div class="min"></div>
+            <div class="sec"></div>
+            <div class="cap"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
